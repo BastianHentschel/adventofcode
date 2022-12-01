@@ -4,7 +4,7 @@ use std::mem::swap;
 
 fn main() {
     {// Part One
-        let file = File::open("../../data/day1.txt").unwrap();
+        let file = File::open("data/day1.txt").unwrap();
         let lines = BufReader::new(file).lines();
         let mut cur_count = 0;
         let mut max_count = 0;
@@ -22,7 +22,7 @@ fn main() {
     }
 
     {// Part Two
-        let file = File::open("../../data/day1.txt").unwrap();
+        let file = File::open("data/day1.txt").unwrap();
         let lines = BufReader::new(file).lines();
         let mut max_counts = [0, 0, 0];
         let mut cur_count = 0;
