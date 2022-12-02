@@ -1,6 +1,3 @@
-use std::fs;
-use std::fs::{File, OpenOptions};
-
 #[tokio::main]
 async fn main() {
     let base_url: String = "https://adventofcode.com/2022/day".to_string();

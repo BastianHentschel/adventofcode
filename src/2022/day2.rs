@@ -1,18 +1,22 @@
 use std::fmt::Display;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
-
+use std::io;
+use std::io::{BufRead, BufReader, Seek};
 
 
 fn main() {
+    let mut file = File::open("data/day2.txt").unwrap();
+    let reader = BufReader::new(file.try_clone().unwrap());
+    let result1 = part1(reader.lines());
+    file.rewind().unwrap();
+    let reader = BufReader::new(file);
+    let result2 = part2(reader.lines());
     println!("Day 2:");
-    println!("  Result 1: {}", part1());
-    println!("  Result 2: {}", part2());
+    println!("  Result 1: {}", result1);
+    println!("  Result 2: {}", result2);
 }
 
-fn part1() -> impl Display {
-    let file = File::open("data/day2.txt").unwrap();
-    let lines = BufReader::new(file).lines();
+fn part1(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
     let mut points = 0;
     for line in lines {
         if let Ok(line) = line {
@@ -47,9 +51,7 @@ fn part1() -> impl Display {
     points
 }
 
-fn part2() -> impl Display {
-    let file = File::open("data/day2.txt").unwrap();
-    let lines = BufReader::new(file).lines();
+fn part2(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
     let mut points = 0;
     for line in lines {
         if let Ok(line) = line {
