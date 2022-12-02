@@ -16,14 +16,22 @@ fn main() {
     println!("  Result 2: {}", result2);
 }
 
-fn part1(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
+fn part1(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
     let mut cur_count = 0;
     let mut max_count = 0;
     for line in lines {
         if let Ok(data) = line {
             match data.as_str() {
-                "" =>
-                    (max_count, cur_count) = (if max_count < cur_count { cur_count } else { max_count }, 0),
+                "" => {
+                    (max_count, cur_count) = (
+                        if max_count < cur_count {
+                            cur_count
+                        } else {
+                            max_count
+                        },
+                        0,
+                    )
+                }
 
                 _ => cur_count += data.parse::<i32>().unwrap(),
             }
@@ -32,7 +40,7 @@ fn part1(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
     max_count
 }
 
-fn part2(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
+fn part2(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
     let mut max_counts = [0, 0, 0];
     let mut cur_count = 0;
     for line in lines {
@@ -43,7 +51,7 @@ fn part2(lines: impl Iterator<Item=io::Result<String>>) -> impl Display {
                         if *count < cur_count {
                             swap(count, &mut cur_count);
                         }
-                    };
+                    }
                     cur_count = 0;
                 }
 
