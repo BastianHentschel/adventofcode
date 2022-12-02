@@ -1,23 +1,22 @@
 use std::fmt::Display;
 use std::fs::File;
-use std::io;
 use std::io::{BufRead, BufReader, Seek};
 
 fn main() {
     let mut file = File::open("data/day2.txt").unwrap();
     let reader = BufReader::new(file.try_clone().unwrap());
-    let result1 = part1(reader.lines());
+    let result1 = part1(reader);
     file.rewind().unwrap();
     let reader = BufReader::new(file);
-    let result2 = part2(reader.lines());
+    let result2 = part2(reader);
     println!("Day 2:");
     println!("  Result 1: {}", result1);
     println!("  Result 2: {}", result2);
 }
 
-fn part1(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
+fn part1(reader: impl BufRead) -> impl Display {
     let mut points = 0;
-    for line in lines {
+    for line in reader.lines() {
         if let Ok(line) = line {
             let mut chars = line.chars();
             let enemy = chars.next().unwrap();
@@ -56,9 +55,9 @@ fn part1(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
     points
 }
 
-fn part2(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
+fn part2(reader: impl BufRead) -> impl Display {
     let mut points = 0;
-    for line in lines {
+    for line in reader.lines() {
         if let Ok(line) = line {
             let mut chars = line.chars();
             let enemy = chars.next().unwrap();
@@ -93,4 +92,23 @@ fn part2(lines: impl Iterator<Item = io::Result<String>>) -> impl Display {
         }
     }
     points
+}
+
+#[cfg(test)]
+mod tests {
+    static DATA: &str = "A Y
+B X
+C Z";
+
+    #[test]
+    fn part1() {
+        let result = crate::part1(DATA.as_bytes());
+        assert_eq!(format!("{}", result), "15");
+    }
+
+    #[test]
+    fn part2() {
+        let result = crate::part2(DATA.as_bytes());
+        assert_eq!(format!("{}", result), "12");
+    }
 }
