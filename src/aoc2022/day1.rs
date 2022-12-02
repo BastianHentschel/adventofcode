@@ -2,9 +2,10 @@ use std::fmt::Display;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Seek};
 use std::mem::swap;
+use std::path::Path;
 
-fn main() {
-    let mut file = File::open("data/day1.txt").unwrap();
+pub fn runner<P: AsRef<Path>>(path: P) {
+    let mut file = File::open(path).unwrap();
     let reader = BufReader::new(file.try_clone().unwrap());
     let result1 = part1(reader);
     file.rewind().unwrap();
@@ -23,14 +24,13 @@ fn part1(reader: impl BufRead) -> impl Display {
         if let Ok(data) = line {
             match data.as_str() {
                 "" => {
-                    (max_count, cur_count) = (
-                        if max_count < cur_count {
-                            cur_count
-                        } else {
-                            max_count
-                        },
-                        0,
-                    )
+                    max_count = if max_count < cur_count {
+                        cur_count
+                    } else {
+                        max_count
+                    };
+
+                    cur_count = 0;
                 }
 
                 _ => cur_count += data.parse::<i32>().unwrap(),
@@ -64,7 +64,7 @@ fn part2(reader: impl BufRead) -> impl Display {
         if *count < cur_count {
             swap(count, &mut cur_count);
         }
-    };
+    }
     max_counts.iter().sum::<i32>()
 }
 

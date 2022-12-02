@@ -1,9 +1,10 @@
 use std::fmt::Display;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Seek};
+use std::path::Path;
 
-fn main() {
-    let mut file = File::open("data/day2.txt").unwrap();
+pub fn runner<P: AsRef<Path>>(path: P) {
+    let mut file = File::open(path).unwrap();
     let reader = BufReader::new(file.try_clone().unwrap());
     let result1 = part1(reader);
     file.rewind().unwrap();
