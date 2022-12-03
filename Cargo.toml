@@ -18,6 +18,7 @@ path = "src/main.rs"
 name = "fetch"
 path = "src/fetch.rs"
 
+
 #[[bin]]
 #name = "day1"
 #path = "src/aoc2022/day1.rs"

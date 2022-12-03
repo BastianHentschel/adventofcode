@@ -97,19 +97,21 @@ fn part2(reader: impl BufRead) -> impl Display {
 
 #[cfg(test)]
 mod tests {
+    use crate::aoc2022::day2;
+
     static DATA: &str = "A Y
 B X
 C Z";
 
     #[test]
     fn part1() {
-        let result = crate::part1(DATA.as_bytes());
+        let result = day2::part1(DATA.as_bytes());
         assert_eq!(format!("{}", result), "15");
     }
 
     #[test]
     fn part2() {
-        let result = crate::part2(DATA.as_bytes());
+        let result = day2::part2(DATA.as_bytes());
         assert_eq!(format!("{}", result), "12");
     }
 }
