@@ -22,10 +22,16 @@ fn part1(reader: impl BufRead) -> impl Display {
         let line = line.unwrap();
         let length = line.len(); // fine because only a-zA-Z as input
         let (comp1, comp2) = line.split_at(length / 2);
-        let char = comp1.bytes()
+        let char = comp1
+            .bytes()
             .find(|c| comp2.contains(*c as char))
             .expect("Missing char");
-        sum += (char - if (char as char).is_ascii_lowercase() { 0x60 } else { 0x40 - 26 }) as u32;
+        sum += (char
+            - if (char as char).is_ascii_lowercase() {
+                0x60
+            } else {
+                0x40 - 26
+            }) as u32;
     }
     sum
 }
@@ -35,10 +41,16 @@ fn part2(reader: impl BufRead) -> impl Display {
     let lines = reader.lines();
     for line_triple in lines.array_chunks::<3>() {
         let line_triple: Vec<&String> = line_triple.iter().map(|x| x.as_ref().unwrap()).collect();
-        let char = line_triple[0].bytes()
+        let char = line_triple[0]
+            .bytes()
             .find(|c| line_triple[1].contains(*c as char) && line_triple[2].contains(*c as char))
             .expect("Missing char");
-        sum += (char - if (char as char).is_ascii_lowercase() { 0x60 } else { 0x40 - 26 }) as u32;
+        sum += (char
+            - if (char as char).is_ascii_lowercase() {
+                0x60
+            } else {
+                0x40 - 26
+            }) as u32;
     }
     sum
 }
