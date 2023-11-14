@@ -33,13 +33,14 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
     sum
 }
 
-test_day!(year2022, day03, 157, 70);
+test_day!(year2022, day03, "157", "70");
 
 fn get_priority(char: char) -> u8 {
-    const Z: u8 = 'Z'.as_ascii().unwrap().as_u8();
-    const A: u8 = 'A'.as_ascii().unwrap().as_u8();
-    const a: u8 = 'a'.as_ascii().unwrap().as_u8();
-    let ascii = char.as_ascii().unwrap().as_u8();
+    const Z: u8 = 'Z'.as_ascii().unwrap().to_u8();
+    const A: u8 = 'A'.as_ascii().unwrap().to_u8();
+    #[allow(non_upper_case_globals)]
+    const a: u8 = 'a'.as_ascii().unwrap().to_u8();
+    let ascii = char.as_ascii().unwrap().to_u8();
     ascii - if ascii <= Z {
         A - 26
     } else {

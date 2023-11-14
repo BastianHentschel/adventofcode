@@ -2,6 +2,7 @@ pub mod day01;
 pub mod day02;
 pub mod day03;
 pub mod day04;
+pub mod day05;
 #[cfg(test)]
 mod tests {
    mod year2022 {
@@ -9,5 +10,6 @@ mod tests {
         crate::test_test_existence!(year2022, day02);
         crate::test_test_existence!(year2022, day03);
         crate::test_test_existence!(year2022, day04);
+        crate::test_test_existence!(year2022, day05);
     }
 }

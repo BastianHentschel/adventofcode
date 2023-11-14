@@ -15,19 +15,19 @@ macro_rules! test_day {
                 fn test_part1() {
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("test_{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
-                    assert_eq!(part1(BufReader::new(file)), $sol1);
+                    assert_eq!(part1(BufReader::new(file)).to_string(), $sol1.to_string());
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
-                    println!("{}", part1(BufReader::new(file)));
+                    println!("{}", part1(BufReader::new(file)).to_string());
                 }
                 #[test]
                 fn test_part2() {
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("test_{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
-                    assert_eq!(part2(BufReader::new(file)), $sol2);
+                    assert_eq!(part2(BufReader::new(file)).to_string(), $sol2.to_string());
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
-                    println!("{}", part2(BufReader::new(file)));
+                    println!("{}", part2(BufReader::new(file)).to_string());
                 }
             }
         }
@@ -48,7 +48,7 @@ macro_rules! test_test_existence {
                 let path = PathBuf::new().join("src").join("years").join(stringify!($year)).join(format!("{}.rs", stringify!($day)));
                 let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
                 let file = BufReader::new(file);
-                let regex = Regex::new(&*format!("test_day!\\(\\s*{}\\s*,\\s*{}\\s*,\\s*-?\\s*\\d+\\s*,\\s*-?\\s*\\d+\\s*\\)", stringify!($year), stringify!($day))).unwrap();
+                let regex = Regex::new(&*format!("test_day!\\(\\s*{}\\s*,\\s*{}\\s*,\\s*\".+\"\\s*,\\s*\".+\"\\s*\\)", stringify!($year), stringify!($day))).unwrap();
                 let found_test = file.lines().find(|line| regex.is_match(line.as_ref().unwrap())).is_some();
                 assert!(found_test);
             }

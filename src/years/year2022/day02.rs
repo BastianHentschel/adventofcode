@@ -1,4 +1,3 @@
-use std::cmp::max;
 use std::io::{BufRead};
 use crate::test_day;
 use Hand::*;
@@ -127,4 +126,4 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
     score
 }
 
-test_day!(year2022, day02, 15, 12);
+test_day!(year2022, day02, "15", "12");

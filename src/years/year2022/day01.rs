@@ -37,4 +37,4 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
     sums.iter().rev().take(3).sum()
 }
 
-test_day!(year2022, day01, 24000, 45000);
+test_day!(year2022, day01, "24000", "45000");

@@ -1,7 +1,4 @@
-use std::collections::hash_map::RandomState;
-use std::collections::HashSet;
-use std::io::{BufRead};
-use std::ops::RangeBounds;
+use std::io::BufRead;
 use crate::test_day;
 
 pub fn part1<R: BufRead>(input: R) -> i32 {
@@ -42,4 +39,4 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
     count
 }
 
-test_day!(year2022, day04, 2, 4);
+test_day!(year2022, day04, "2", "4");

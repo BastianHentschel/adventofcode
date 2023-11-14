@@ -27,4 +27,5 @@ fn main() {
     let path = format!("data/year{}/day{:02}.txt", year, day);
     std::fs::write(&path, body).expect("Failed to write file");
     println!("Wrote to {}", path);
+    println!("Puzzle at https://adventofcode.com/{}/day/{}", year, day);
 }
