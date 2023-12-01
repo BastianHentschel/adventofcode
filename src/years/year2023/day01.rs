@@ -27,7 +27,7 @@ pub fn part2<R: BufRead>(input: R) -> impl ToString {
         .lines()
         .map(|l| l.unwrap())
         .map(|line| {
-            let mut iter = line.chars().merge(String::new(), |storage, item| {
+            let mut iter = line.chars().fold_map(String::new(), |storage, item| {
                 item.to_digit(10)
                     .map(|num| num as usize)
                     .or_else(|| {

@@ -34,10 +34,10 @@ where
     I: Iterator,
     F: FnMut(&mut T, <Self as Iterator>::Item) -> Option<O>,
 {
-    fn merge(self, storage: T, function: F) -> FoldMap<Self, T, O, F> {
+    fn fold_map(self, state: T, function: F) -> FoldMap<Self, T, O, F> {
         FoldMap {
             underlying: self,
-            storage,
+            storage: state,
             function,
         }
     }
