@@ -13,8 +13,10 @@ macro_rules! test_day {
                 use std::path::PathBuf;
                 #[test]
                 fn test_part1() {
-                    let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("test_{}.txt", stringify!($day)));
-                    let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
+                    let path = PathBuf::new().join("data").join(format!("{}", stringify!($year)));
+                    let file = File::open(path.join(format!("test_{}.txt", stringify!($day)))).or_else(|_| {
+                        File::open(path.join(format!("test_{}_part1.txt", stringify!($day))))
+                    }).expect(&*format!("Missing test case for {} {}", stringify!($year), stringify!($day)));
                     assert_eq!(part1(BufReader::new(file)).to_string(), $sol1.to_string());
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
@@ -22,8 +24,11 @@ macro_rules! test_day {
                 }
                 #[test]
                 fn test_part2() {
-                    let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("test_{}.txt", stringify!($day)));
-                    let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));
+                    let path = PathBuf::new().join("data").join(format!("{}", stringify!($year)));
+
+                    let file = File::open(path.join(format!("test_{}.txt", stringify!($day)))).or(
+                        File::open(path.join(format!("test_{}_part2.txt", stringify!($day))))
+                    ).expect(&*format!("Missing test case for {} {}", stringify!($year), stringify!($day)));
                     assert_eq!(part2(BufReader::new(file)).to_string(), $sol2.to_string());
                     let path = PathBuf::new().join("data").join(format!("{}", stringify!($year))).join(format!("{}.txt", stringify!($day)));
                     let file = File::open(path).expect(&*format!("Missing input data for {} {}.", stringify!($year), stringify!($day)));

@@ -60,6 +60,7 @@ impl Hand {
     }
 }
 
+#[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> i32 {
     let mut score = 0;
     for line in input.lines() {
@@ -93,6 +94,7 @@ pub fn part1<R: BufRead>(input: R) -> i32 {
     score
 }
 
+#[allow(unused)]
 pub fn part2<R: BufRead>(input: R) -> i32 {
     let mut score = 0;
     for line in input.lines() {

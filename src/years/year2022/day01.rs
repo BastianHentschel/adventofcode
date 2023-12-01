@@ -2,6 +2,7 @@ use std::cmp::max;
 use std::io::{BufRead};
 use crate::test_day;
 
+#[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> i32 {
     let mut highest = 0;
     let mut sum = 0;
@@ -17,6 +18,7 @@ pub fn part1<R: BufRead>(input: R) -> i32 {
     highest
 }
 
+#[allow(unused)]
 pub fn part2<R: BufRead>(input: R) -> i32 {
     let mut sums = vec![];
 

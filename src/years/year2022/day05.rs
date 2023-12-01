@@ -1,6 +1,7 @@
 use std::io::BufRead;
 use crate::test_day;
 
+#[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> impl ToString {
     let mut input = input.lines().map(Result::unwrap);
     let stack: Vec<_> = input.by_ref().take_while(|l| !l.is_empty()).collect();
@@ -28,6 +29,7 @@ pub fn part1<R: BufRead>(input: R) -> impl ToString {
     stacks.into_iter().map(|mut s| s.pop().unwrap()).collect::<String>()
 }
 
+#[allow(unused)]
 pub fn part2<R: BufRead>(input: R) -> impl ToString {
     let mut input = input.lines().map(Result::unwrap);
     let stack: Vec<_> = input.by_ref().take_while(|l| !l.is_empty()).collect();
