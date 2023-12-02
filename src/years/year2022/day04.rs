@@ -1,5 +1,5 @@
-use std::io::BufRead;
 use crate::test_day;
+use std::io::BufRead;
 
 #[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> i32 {
@@ -16,7 +16,6 @@ pub fn part1<R: BufRead>(input: R) -> i32 {
         let e2 = e2.parse::<i32>().unwrap();
 
         count += (s1 <= s2 && e1 >= e2 || s1 >= s2 && e1 <= e2) as i32;
-
     }
     count
 }
@@ -36,7 +35,6 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
         let e2 = e2.parse::<i32>().unwrap();
 
         count += (e1 >= s2 && s1 <= e2 || e2 >= s1 && s2 <= e1) as i32;
-
     }
     count
 }

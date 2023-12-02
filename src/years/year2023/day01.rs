@@ -1,6 +1,6 @@
 use crate::test_day;
 use std::io::BufRead;
-use std::ops::{BitAnd, Index};
+
 use crate::fold_map::FoldMapExt;
 
 #[allow(unused)]
@@ -27,15 +27,14 @@ pub fn part2<R: BufRead>(input: R) -> impl ToString {
         .lines()
         .map(|l| l.unwrap())
         .map(|line| {
-            let mut iter = line.chars().fold_map(String::new(), |storage, item| {
-                item.to_digit(10)
-                    .map(|num| num as usize)
-                    .or_else(|| {
-                        storage.push(item);
-                        NUMS.iter()
-                            .position(|num| storage.ends_with(num))
-                            .map(|i| i + 1)
-                    })
+            let mut chars = line.chars();
+            let mut iter = chars.fold_map(String::new(), |storage, item| {
+                item.to_digit(10).map(|num| num as usize).or_else(|| {
+                    storage.push(item);
+                    NUMS.iter()
+                        .position(|num| storage.ends_with(num))
+                        .map(|i| i + 1)
+                })
             });
 
             let first = iter.next().unwrap();
@@ -47,4 +46,3 @@ pub fn part2<R: BufRead>(input: R) -> impl ToString {
 }
 
 test_day!(year2023, day01, "142", "281");
-

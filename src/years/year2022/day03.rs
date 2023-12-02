@@ -1,11 +1,10 @@
+use crate::test_day;
 use std::collections::hash_map::RandomState;
 use std::collections::HashSet;
-use std::io::{BufRead};
-use crate::test_day;
+use std::io::BufRead;
 
 #[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> i32 {
-
     let mut sum = 0;
     for line in input.lines() {
         let line = line.unwrap();
@@ -31,7 +30,6 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
         let char = itrsec1.intersection(&third_set).next().unwrap();
 
         sum += get_priority(*char) as i32
-
     }
     sum
 }
@@ -44,9 +42,5 @@ fn get_priority(char: char) -> u8 {
     #[allow(non_upper_case_globals)]
     const a: u8 = 'a'.as_ascii().unwrap().to_u8();
     let ascii = char.as_ascii().unwrap().to_u8();
-    ascii - if ascii <= Z {
-        A - 26
-    } else {
-        a
-    } + 1
+    ascii - if ascii <= Z { A - 26 } else { a } + 1
 }

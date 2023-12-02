@@ -1,51 +1,34 @@
-pub struct FoldMap<I, T, O, F>
-where
-    I: Iterator,
-    F: FnMut(&mut T, I::Item) -> Option<O>,
-{
-    underlying: I,
-    storage: T,
-    function: F,
+pub struct FoldMap<'a, I: Iterator + ?Sized, T, O> {
+    underlying: &'a mut I,
+    state: T,
+    function: fn(&mut T, I::Item) -> Option<O>,
 }
 
-impl<I, T, O, F> Iterator for FoldMap<I, T, O, F>
-where
-    I: Iterator,
-    F: FnMut(&mut T, I::Item) -> Option<O>,
-{
+impl<I: Iterator + ?Sized, T, O> Iterator for FoldMap<'_, I, T, O> {
     type Item = O;
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
-            if let Some(item) = self.underlying.next() {
-                if let Some(output) = self.function.call_mut((&mut self.storage, item)) {
-                    return Some(output);
-                }
-            } else {
-                return None;
+            let item = self.underlying.next()?;
+            if let Some(output) = (self.function)(&mut self.state, item) {
+                return Some(output);
             }
         }
     }
 }
 
-pub trait FoldMapExt<I, T, O, F>: Iterator
-where
-    Self: Sized,
-    I: Iterator,
-    F: FnMut(&mut T, <Self as Iterator>::Item) -> Option<O>,
-{
-    fn fold_map(self, state: T, function: F) -> FoldMap<Self, T, O, F> {
+pub trait FoldMapExt<I: Iterator + ?Sized, T, O>: Iterator {
+    fn fold_map(
+        &mut self,
+        state: T,
+        function: fn(&mut T, Self::Item) -> Option<O>,
+    ) -> FoldMap<Self, T, O> {
         FoldMap {
             underlying: self,
-            storage: state,
+            state,
             function,
         }
     }
 }
 
-impl<I, T, O, F> FoldMapExt<I, T, O, F> for I
-where
-    I: Iterator,
-    F: FnMut(&mut T, <Self as Iterator>::Item) -> Option<O>,
-{
-}
+impl<I: Iterator + ?Sized, T, O> FoldMapExt<I, T, O> for I {}

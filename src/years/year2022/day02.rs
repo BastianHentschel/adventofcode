@@ -1,5 +1,5 @@
-use std::io::{BufRead};
 use crate::test_day;
+use std::io::BufRead;
 use Hand::*;
 use Outcome::*;
 
@@ -23,18 +23,18 @@ impl Hand {
                 Rock => Draw,
                 Paper => Loss,
                 Scissors => Win,
-            }
+            },
             Paper => match other {
                 Rock => Win,
                 Paper => Draw,
                 Scissors => Loss,
-            }
+            },
 
             Scissors => match other {
                 Rock => Loss,
                 Paper => Win,
                 Scissors => Draw,
-            }
+            },
         }
     }
 
@@ -44,18 +44,18 @@ impl Hand {
                 Win => Paper,
                 Draw => Rock,
                 Loss => Scissors,
-            }
+            },
             Paper => match other {
                 Win => Scissors,
                 Draw => Paper,
                 Loss => Rock,
-            }
+            },
 
             Scissors => match other {
                 Win => Rock,
                 Draw => Scissors,
                 Loss => Paper,
-            }
+            },
         }
     }
 }
@@ -70,14 +70,14 @@ pub fn part1<R: BufRead>(input: R) -> i32 {
             "X" => Rock,
             "Y" => Paper,
             "Z" => Scissors,
-            _ => unreachable!("fixed input")
+            _ => unreachable!("fixed input"),
         };
 
         let opp = match opp {
             "A" => Rock,
             "B" => Paper,
             "C" => Scissors,
-            _ => unreachable!("fixed input")
+            _ => unreachable!("fixed input"),
         };
         score += match me.play(&opp) {
             Win => 6,
@@ -104,14 +104,14 @@ pub fn part2<R: BufRead>(input: R) -> i32 {
             "X" => Loss,
             "Y" => Draw,
             "Z" => Win,
-            _ => unreachable!("fixed input")
+            _ => unreachable!("fixed input"),
         };
 
         let opp = match opp {
             "A" => Rock,
             "B" => Paper,
             "C" => Scissors,
-            _ => unreachable!("fixed input")
+            _ => unreachable!("fixed input"),
         };
         let me = opp.play_to(&target);
         score += match target {

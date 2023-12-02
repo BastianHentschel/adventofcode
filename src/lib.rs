@@ -4,6 +4,6 @@
 #![feature(fn_traits)]
 #![feature(const_trait_impl)]
 
+pub mod fold_map;
 mod macros;
 mod years;
-mod fold_map;
