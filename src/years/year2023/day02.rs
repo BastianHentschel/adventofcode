@@ -8,7 +8,7 @@ pub fn part1<R: BufRead>(input: R) -> impl ToString {
     let low_count_re = Regex::new(r"^(((1[012]|\d) red|(1[0123]|\d) green|(1[01234]|\d) blue)[,;] )*((1[012]|\d) red|(1[0123]|\d) green|(1[01234]|\d) blue)$").unwrap();
     input
         .lines()
-        .map(|l| l.unwrap())
+        .map(Result::unwrap)
         .enumerate()
         .filter_map(|(game, line)| {
             low_count_re
@@ -21,10 +21,9 @@ pub fn part1<R: BufRead>(input: R) -> impl ToString {
 #[allow(unused)]
 pub fn part2<R: BufRead>(input: R) -> impl ToString {
     let count_re = Regex::new(r"(\d+) red|(\d+) green|(\d+) blue").unwrap();
-
     input
         .lines()
-        .map(|l| l.unwrap())
+        .map(Result::unwrap)
         .enumerate()
         .map(|(game, line)| {
             let mut red = 0;

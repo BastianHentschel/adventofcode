@@ -19,15 +19,15 @@ use std::io::BufRead;
 
 #[allow(unused)]
 pub fn part1<R: BufRead>(input: R) -> impl ToString {{
-    todo!("part 1 implementation")
+    todo!("part 1 implementation"); 0
 }}
 
 #[allow(unused)]
 pub fn part2<R: BufRead>(input: R) -> impl ToString {{
-    todo!("part 2 implementation")
+    todo!("part 2 implementation"); 0
 }}
 
-test_day!(year{:04}, day{:02}, -1, -1);
+test_day!({}, {}, "-1", "-1");
 "#
     };
 }

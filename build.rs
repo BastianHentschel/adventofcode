@@ -15,13 +15,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         let Ok(year) = year else { continue; };
         let year_name = year.file_name();
         let Some(year_name) = year_name.to_str() else { continue; };
-        if year_name != OsString::from("mod.rs") {
+        if year_name != "mod.rs" {
             writeln!(years_mod_file, "pub mod {year_name};")?;
             let mut year_mod_file = File::create(year.path().join("mod.rs"))?;
 
             for day in fs::read_dir(year.path())? {
                 let Ok(day) = day else { continue; };
-                if day.file_name() != OsString::from("mod.rs") {
+                if day.file_name() != *"mod.rs" {
                     let day_name = day.path();
                     let Some(day_name) = day_name.file_stem() else { continue; };
                     let Some(day_name) = day_name.to_str() else { continue; };
@@ -36,7 +36,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let Ok(year) = year else { continue; };
         let year_name = year.file_name();
         let Some(year_name) = year_name.to_str() else { continue; };
-        if year_name != OsString::from("mod.rs") {
+        if year_name != "mod.rs" {
             println!("{:?}", year.path().join("mod.rs"));
             let mut year_mod_file = File::options().append(true).open(year.path().join("mod.rs"))?;
             writeln!(year_mod_file, "#[cfg(test)]")?;
@@ -45,7 +45,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             for day in fs::read_dir(year.path())? {
 
                 let Ok(day) = day else { continue; };
-                if day.file_name() != OsString::from("mod.rs") {
+                if day.file_name() != *"mod.rs" {
                     let day_name = day.path();
                     let Some(day_name) = day_name.file_stem() else { continue; };
                     let Some(day_name) = day_name.to_str() else { continue; };

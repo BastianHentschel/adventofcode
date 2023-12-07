@@ -92,7 +92,7 @@ macro_rules! test_test_existence {
                 ));
                 let file = BufReader::new(file);
                 let regex = Regex::new(&*format!(
-                    "test_day!\\(\\s*{}\\s*,\\s*{}\\s*,\\s*\".+\"\\s*,\\s*\".+\"\\s*\\)",
+                    "test_day!\\(\\s*{}\\s*,\\s*{}\\s*,\\s*\".+\"\\s*\\,\\s*\".+\"\\s*\\)",
                     stringify!($year),
                     stringify!($day)
                 ))
