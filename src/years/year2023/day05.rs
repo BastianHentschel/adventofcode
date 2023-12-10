@@ -74,6 +74,7 @@ pub fn part2<R: BufRead>(input: R) -> impl ToString {
                     for mapper in &mappers {
                         num = mapper.map(num).unwrap_or(num);
                     }
+                    num
                 })
                 .min()
                 .unwrap()
@@ -82,7 +83,7 @@ pub fn part2<R: BufRead>(input: R) -> impl ToString {
         .unwrap(); 0
 }
 
-test_day!(year2023, day05, "35", "-1");
+test_day!(year2023, day05, "35", "46");
 
 struct Mapper {
     ranges: Vec<(Range<usize>, isize)>,

@@ -1,8 +1,7 @@
 use std::{
     error::Error,
-    ffi::OsString,
-    fs::{self, File},
     io::Write,
+    fs::{self, File},
 };
 use std::path::PathBuf;
 
